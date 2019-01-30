@@ -9001,6 +9001,7 @@ const issues = [
   }
 ];
 
-var issuesWithUpdatedApiUrl = issues.map((url) => {
-    const apiV2 = url.replace("/api.", "/api-v2.")
+var issuesWithUpdatedApiUrl = issues.map((issue) => {
+    const apiV2 = issue.url.replace("/api.", "/api-v2.")
+    return Object.assign({}, issue, {url: apiV2})
 })
