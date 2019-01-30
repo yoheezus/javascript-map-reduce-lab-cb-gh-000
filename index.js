@@ -9001,7 +9001,22 @@ const issues = [
   }
 ];
 
-var issuesWithUpdatedApiUrl = issues.map((issue) => {
-    const apiV2 = issue.url.replace("/api.", "/api-v2.")
-    return Object.assign({}, issue, {url: apiV2})
-})
+const nonAutomaticIssues = issues.reduce((totalIssues, issue) => {
+  const isAutomaticIssue = issue.body.includes('automatically created by learn.co');
+
+  if (!isAutomaticIssue) {
+    totalIssues.push(issue);
+  }
+
+  return totalIssues;
+}, []);
+
+const $tbody = document.getElementById('results');
+$tbody.innerHTML = nonAutomaticIssues
+  .map(issue => `<tr>
+    <td>${issue.body}</td>
+    <td>${issue.created_at}</td>
+    <td>${issue.state}</td>
+    </tr>`
+  )
+.join('');
