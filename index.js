@@ -9018,5 +9018,4 @@ $tbody.innerHTML = nonAutomaticIssues
     <td>${issue.created_at}</td>
     <td>${issue.state}</td>
     </tr>`
-  )
-.join('');
+  ).join('');
